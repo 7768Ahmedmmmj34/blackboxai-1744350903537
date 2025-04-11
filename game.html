@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الذاكرة - اللعب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .card {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .card-front {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-500 to-pink-500 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-gray-800 hover:text-purple-600 transition duration-300">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+                <div class="flex space-x-4 items-center">
+                    <button id="restartBtn" class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 py-2 px-4 rounded-full transition duration-300">
+                        <i class="fas fa-redo ml-1"></i>
+                        إعادة اللعب
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Stats -->
+    <div class="container mx-auto px-4 py-6">
+        <div class="bg-white rounded-lg p-4 shadow-lg mb-6">
+            <div class="flex justify-around text-center">
+                <div>
+                    <h3 class="text-gray-600 text-lg">الوقت</h3>
+                    <p id="timer" class="text-2xl font-bold text-purple-600">00:00</p>
+                </div>
+                <div>
+                    <h3 class="text-gray-600 text-lg">المحاولات</h3>
+                    <p id="moves" class="text-2xl font-bold text-purple-600">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div id="gameBoard" class="grid grid-cols-4 gap-4 max-w-2xl mx-auto">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Win Modal -->
+    <div id="winModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-white rounded-lg p-8 max-w-md mx-4">
+            <h2 class="text-3xl font-bold text-center text-purple-600 mb-4">مبروك! 🎉</h2>
+            <p class="text-gray-600 text-center mb-4">لقد أكملت اللعبة بنجاح!</p>
+            <div class="text-center space-y-4">
+                <p class="text-xl">الوقت المستغرق: <span id="finalTime" class="font-bold text-purple-600"></span></p>
+                <p class="text-xl">عدد المحاولات: <span id="finalMoves" class="font-bold text-purple-600"></span></p>
+                <button onclick="location.reload()" class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-3 px-6 rounded-full transition duration-300">
+                    العب مرة أخرى
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
